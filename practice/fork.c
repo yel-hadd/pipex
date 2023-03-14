@@ -6,7 +6,16 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:52:36 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/14 11:52:40 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:56:19 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main(void)
+{
+    fork();
+    printf("Hello World\n");
+}
