@@ -6,13 +6,13 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:05:48 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/23 16:07:33 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/24 20:54:14 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static size_t	word_len(char const *s, char c)
+static size_t	word_len(char *s, char c)
 {
 	size_t	i;
 
@@ -32,7 +32,7 @@ static void	free_all(char **s, size_t index)
 	free(s);
 }
 
-static char	**allocate(char **result, size_t i, char const *s, char c)
+static char	**allocate(char **result, size_t i, char *s, char c)
 {
 	result[i] = (char *) malloc((word_len(s, c) + 1) * sizeof(char));
 	if (!result[i])
@@ -45,7 +45,7 @@ static char	**allocate(char **result, size_t i, char const *s, char c)
 	return (result);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	size_t	count;
 	size_t	i;
