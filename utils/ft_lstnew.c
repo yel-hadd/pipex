@@ -6,13 +6,13 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 23:35:09 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/24 23:53:05 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/26 20:36:00 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-c_list	*ft_lstnew(char **args, int in)
+c_list	*ft_lstnew(char **args, int in, int out)
 {
 	c_list	*ptr;
 
@@ -22,7 +22,7 @@ c_list	*ft_lstnew(char **args, int in)
 	ptr->args = args;
     ptr->path = get_path(args[0]);
     ptr->in = in;
-    ptr->out = 0;
+    ptr->out = out;
 	ptr->next = NULL;
 	return (ptr);
 }
