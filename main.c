@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:48:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/26 21:13:21 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:58:31 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	execute(c_list **c)
 	c_list	*node;
 
 	node = *c;
+	dup2(node->in, STDIN_FILENO);
+	dup2(node->out, STDOUT_FILENO);
 	if (!is_valid(c))
 		return (1);
 	err = execve(node->path, node->args, NULL);
@@ -47,23 +49,28 @@ int	execute(c_list **c)
 
 int	main(int ac, char **av)
 {
-	int		infile;
-	int		outfd;
 	int		fd[2];
 	c_list	*cmd1;
+	c_list	*cmd2;
 	int		id;
 	int		k;
+	(void)	ac;
 
 	pipe(fd);
-	//outfd = dup2(fd[1], 1);
 	av ++;
-	cmd1 = ft_lstnew(ft_split(av[1], ' '), open(av[0], O_WRONLY), fd[1]);
+	cmd1 = ft_lstnew(ft_split(av[1], ' '), open(av[0], O_RDWR, 0755), fd[1]);
+	cmd2 = ft_lstnew(ft_split(av[2], ' '), fd[0], open(av[3], O_WRONLY | O_CREAT, 0755));
+	id = fork();
+	if (id == 0)
+		k = execute(&cmd1);
+	wait(NULL);
 	id = fork();
 	if (id == 0)
 	{
-		k = execute(&cmd1);
-		printf("%d\n", k);
+		printf("%s\n", av[2]);
+		k = execute(&cmd2);
 	}
+	
 	//printf("path: %s; in: %d; out: %d;\n", cmd1->path, cmd1->in, cmd1->out);
 
 	//atexit(f);
