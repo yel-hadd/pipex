@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:55:13 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/24 21:55:23 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:41:19 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	**get_path_dirs(void)
 {
 	char	*tmp;
 	char	**directories;
-	int		i;
 
 	while (*environ)
 	{
