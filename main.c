@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:48:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/28 01:36:56 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/28 01:41:06 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_lstclear(c_list **lst)
 	}
 }
 
-void	print_error(int check, c_list **c)
+void	print_error(int check)
 {
 	if (check == -1)
 		perror("Error");
@@ -51,7 +51,6 @@ void	print_error(int check, c_list **c)
 		perror("Error");
 	else if (check == -4)
 		perror("Error");
-	ft_lstclear(c);
 	exit(1);
 }
 
@@ -82,7 +81,7 @@ int	execute(c_list **c)
 	node = *c;
 	check = is_valid(c);
 	if (check != 1)
-		return (print_error(check, c), -1);
+		return (print_error(check), -1);
 	err = execve(node->path, node->args, NULL);
 	if (err == -1)
 		return (2);
@@ -126,4 +125,6 @@ int	main(int ac, char **av)
 			write(1, "ERROR\n", 6);
 		close(fd[0]);
 	}
+	ft_lstclear(&cmd1);
+	ft_lstclear(&cmd2);
 }
