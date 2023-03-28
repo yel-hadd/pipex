@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:48:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/28 01:20:07 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/28 01:36:56 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	f()
 {
-	system("leaks a.out");
+	system("leaks pipex");
 }
 
 void	ft_lstdelone(c_list *lst)
 {
 	if (!lst)
-		return ;
+		return;
 	free_2d(lst->args);
 	free(lst->path);
 	free(lst);
 }
 
-void	ft_lstclear(c_list **lst, void (*del)(void*))
+void	ft_lstclear(c_list **lst)
 {
 	c_list	*tmp;
 
-	if (!lst || !(*lst) || !del)
+	if (!lst || !(*lst))
 		return ;
 	tmp = *lst;
 	while (*lst)
@@ -44,13 +44,15 @@ void	ft_lstclear(c_list **lst, void (*del)(void*))
 void	print_error(int check, c_list **c)
 {
 	if (check == -1)
-		perror("Error: Invalid arguments");
+		perror("Error");
 	else if (check == -2)
-		perror("Error: Command not found");
+		perror("Error");
 	else if (check == -3)
-		perror("Error: Failed to open file");
+		perror("Error");
 	else if (check == -4)
-		perror("Error: Failed to open file");
+		perror("Error");
+	ft_lstclear(c);
+	exit(1);
 }
 
 int	is_valid(c_list **c)
@@ -96,6 +98,7 @@ int	main(int ac, char **av)
 	int		k;
 
 	(void)	ac;
+	atexit(f);
 	pipe(fd);
 	av ++;
 	cmd1 = ft_lstnew(ft_split(av[1], ' '), open(av[0], O_RDWR, 0644), fd[1]);
