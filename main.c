@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:48:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/29 22:53:51 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:42:43 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,85 +17,61 @@ void	f()
 	system("leaks pipex");
 }
 
-void	ft_lstdelone(c_list *lst)
-{
-	if (!lst)
-		return;
-	free_2d(lst->args);
-	free(lst->path);
-	free(lst);
-}
-
-void	ft_lstclear(c_list **lst)
-{
-	c_list	*tmp;
-
-	if (!lst || !(*lst))
-		return ;
-	tmp = *lst;
-	while (*lst)
-	{
-		*lst = (*lst)->next;
-		ft_lstdelone(tmp);
-		tmp = *lst;
-	}
-}
-
-int	run_1st_node(c_list **c)
+int	run_node(c_list **c)
 {
 	c_list	*node;
-	int		success;
 
-	success = 0;
 	node = *c;
 	if (is_valid(c) == 1)
 	{
-    	dup2(node->in, 0);
+		dup2(node->in, 0);
 		dup2(node->out, 1);
+		return (execve(node->path, node->args, NULL));
 	}
-	return (execve(node->path, node->args, NULL));
+	return (-1);
 }
 
 int	main(int ac, char **av)
 {
 	int		fd[2];
-	c_list	*cmd1;
-	//c_list	*cmd2;
+	c_list	*list;
 	int		id;
 	int		infile;
 	int		outfile;
+	(void)	ac;
 
 	//atexit(f);
 	pipe(fd);
-	outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC , 0644);
-	av ++;
-	infile = open(av[0], O_RDWR);
-	cmd1 = ft_lstnew(ft_split(av[1], ' '), infile, fd[1]);
+	infile = open(av[1], O_RDWR);
+	outfile = open(av[4], O_WRONLY | O_CREAT | O_TRUNC , 0644);
+	list = ft_lstnew(ft_split(av[2], ' '), infile, fd[1]);
+	ft_lstadd_back(&list, ft_lstnew(ft_split(av[3], ' '), fd[0], outfile));
+	
 	id = fork();
 	if (id == 0)
 	{
 		close(fd[0]);
-		if (run_1st_node(&cmd1) == -1)
+		if (run_node(&list) == -1)
 		{
 			print_error("Error");
-			ft_lstclear(&cmd1);
+			ft_lstclear(&list);
 			return (1);
 		}
-		close(fd[1]);
 	}
-	wait(NULL);
+	close(fd[1]);
+	list = list->next;
+	id = fork();
+	if (id == 0)
+	{
+		if (run_node(&list) == -1)
+		{
+			print_error("Error");
+			ft_lstclear(&list);
+			return (1);
+		}
+	}
+	close(fd[0]);
+	while (wait(NULL) != -1)
+		;
 	exit(0);
-	//cmd2 = ft_lstnew(ft_split(av[2], ' '), fd[0], outfile);
-	//id = fork();
-	//if (id == 0)
-	//{
-	//	if (run_2nd_node(&cmd2, fd) == 0)
-	//	{
-	//		print_error("Error");
-	//		ft_lstclear(&cmd2);
-	//		return (1);
-	//	}
-	//}
-	//ft_lstclear(&cmd1);
-	//ft_lstclear(&cmd2);
 }
