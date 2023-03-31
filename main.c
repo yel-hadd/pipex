@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:48:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/30 18:42:43 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/31 00:22:26 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,10 @@ int	main(int ac, char **av)
 	int		fd[2];
 	c_list	*list;
 	int		id;
-	int		infile;
-	int		outfile;
-	(void)	ac;
 
-	//atexit(f);
 	pipe(fd);
-	infile = open(av[1], O_RDWR);
-	outfile = open(av[4], O_WRONLY | O_CREAT | O_TRUNC , 0644);
-	list = ft_lstnew(ft_split(av[2], ' '), infile, fd[1]);
-	ft_lstadd_back(&list, ft_lstnew(ft_split(av[3], ' '), fd[0], outfile));
-	
+	list = ft_lstnew(ft_split(av[2], ' '), open(av[1], O_RDWR), fd[1]);
+	ft_lstadd_back(&list, ft_lstnew(ft_split(av[3], ' '), fd[0], open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC , 0644)));
 	id = fork();
 	if (id == 0)
 	{
