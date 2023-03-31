@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:48:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/31 00:22:26 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/03/31 00:50:00 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(int ac, char **av)
 		if (run_node(&list) == -1)
 		{
 			print_error("Error");
-			ft_lstclear(&list);
 			return (1);
 		}
 	}
@@ -59,12 +58,11 @@ int	main(int ac, char **av)
 		if (run_node(&list) == -1)
 		{
 			print_error("Error");
-			ft_lstclear(&list);
 			return (1);
 		}
 	}
 	close(fd[0]);
-	while (wait(NULL) != -1)
-		;
+	while (wait(NULL) != -1) ;
+	ft_lstclear(&list);
 	exit(0);
 }
