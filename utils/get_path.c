@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:55:54 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/04/01 01:19:21 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:08:39 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*get_path(char *cmd)
 
 	dirs = get_path_dirs();
 	i = -1;
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
 	while (dirs[++ i] && dirs != NULL)
 	{
 		tmp = dirs[i];
