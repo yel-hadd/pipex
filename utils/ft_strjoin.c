@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:29:40 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/24 21:26:23 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:10:28 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strjoin(char *s1, char *s2, int c)
 		return (0);
 	while (*s1)
 		*join ++ = *s1 ++;
-	if (c != 1)
+	if (c == 2)
 		*join ++ = '/';
 	while (*s2)
 		*join ++ = *s2 ++;
