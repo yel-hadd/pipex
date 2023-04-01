@@ -1,5 +1,6 @@
 *
 !.gitignore
 !pipex.h
+!Makefile
 !*.c
 !*/
