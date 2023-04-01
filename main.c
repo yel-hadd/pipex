@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:48:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/04/01 01:16:08 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/04/01 01:29:39 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	run_node(t_list **c, int id)
 	if (id != 0)
 		return (0);
 	node = *c;
-	if (node->close != -2)
+	if (node->close != -2 && node->close != -1)
 		close(node->close);
 	if (is_valid(c) == 1)
 	{
@@ -58,11 +58,3 @@ int	main(int ac, char **av)
 		;
 	return (ft_lstclear(&head), 0);
 }
-/*
-pipex.h: Error!
-utils/execute_node.c: Error!
-utils/ft_calloc.c: Error!
-utils/ft_lstdelone.c: Error!
-utils/ft_lstnew.c: Error!
-utils/get_path.c: Error!
-*/
