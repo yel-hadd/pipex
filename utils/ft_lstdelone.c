@@ -6,16 +6,16 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:52:08 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/30 16:52:34 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/04/01 01:18:26 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	ft_lstdelone(c_list *lst)
+void	ft_lstdelone(t_list *lst)
 {
 	if (!lst)
-		return;
+		return ;
 	free_2d(lst->args);
 	free(lst->path);
 	free(lst);
