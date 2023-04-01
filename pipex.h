@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 15:13:41 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/04/01 01:16:47 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/04/01 01:28:42 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct commande
 {
