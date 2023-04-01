@@ -6,7 +6,7 @@
 /*   By: yel-hadd <yel-hadd@mail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:48:32 by yel-hadd          #+#    #+#             */
-/*   Updated: 2023/03/31 00:50:00 by yel-hadd         ###   ########.fr       */
+/*   Updated: 2023/04/01 00:01:49 by yel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	main(int ac, char **av)
 	c_list	*list;
 	int		id;
 
+	if (ac != 5)
+	{
+		print_error("Invalid Syntax: ./pipex file1 cmd1 cmd2 file2\n");
+		return (0);
+	}
 	pipe(fd);
 	list = ft_lstnew(ft_split(av[2], ' '), open(av[1], O_RDWR), fd[1]);
 	ft_lstadd_back(&list, ft_lstnew(ft_split(av[3], ' '), fd[0], open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC , 0644)));
@@ -51,11 +56,11 @@ int	main(int ac, char **av)
 		}
 	}
 	close(fd[1]);
-	list = list->next;
-	id = fork();
+	if (id != 0)
+		id = fork();
 	if (id == 0)
 	{
-		if (run_node(&list) == -1)
+		if (run_node(&list->next) == -1)
 		{
 			print_error("Error");
 			return (1);
