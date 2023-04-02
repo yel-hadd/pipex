@@ -31,10 +31,10 @@ To use the pipex program, execute the following command:
 ```
 The parameters are described as follows:
 
-file1: the input file that contains the text to be processed
-cmd1: the first command that will be executed to process the input from file1
-cmd2: the second command that will be executed to process the output from cmd1
-file2: the output file where the final result will be stored
+* file1: the input file that contains the text to be processed
+* cmd1: the first command that will be executed to process the input from file1
+* cmd2: the second command that will be executed to process the output from cmd1
+* file2: the output file where the final result will be stored
 
 ## Here is an example usage:
 
