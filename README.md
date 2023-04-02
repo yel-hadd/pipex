@@ -1,4 +1,4 @@
-#PIPEX Project
+# PIPEX
 
 The PIPEx project is a part of the curriculum of the 42 School, which is aimed at helping students develop their skills in UNIX systems, file descriptors, processes, and interprocess communication.
 
